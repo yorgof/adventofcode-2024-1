@@ -1,5 +1,6 @@
 import {readFile} from 'fs/promises';
-import { processInputData } from './list-distance';
+import { processInputData as processDistanceInputData } from './list-distance';
+import { processInputData as processSimilarityInputData } from './list-similarity';
 
 // Run the solution
 main().catch(error => {
@@ -17,8 +18,11 @@ async function main() {
     
     const inputData = await readInput(filename);
     
-    const totalDistance = await processInputData(inputData);
+    const totalDistance = await processDistanceInputData(inputData);
     console.log(`The total distance between the lists is: ${totalDistance}`);
+
+    const similarityScore = await processSimilarityInputData(inputData);
+    console.log(`The similarity score between the lists is: ${similarityScore}`);
 }
 
 async function readInput(filePath: string): Promise<string> {
